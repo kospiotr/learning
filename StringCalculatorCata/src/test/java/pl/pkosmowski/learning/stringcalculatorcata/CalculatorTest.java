@@ -41,4 +41,8 @@ public class CalculatorTest {
 	public void shouldNotAllowToAddNegativeNumber() throws Exception {
 		assertThat(calculator.add("1,-2,3"));
 	}
+	@Test
+	public void shouldIgnoreNumberGreaterThan1000() throws Exception {
+		assertThat(calculator.add("2,1001")).isEqualTo(2);
+	}
 }

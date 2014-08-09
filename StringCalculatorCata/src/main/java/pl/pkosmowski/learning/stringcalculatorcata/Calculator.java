@@ -37,6 +37,7 @@ public class Calculator {
 		int result = 0;
 		for (Integer number : numbers) {
 			if(number < 0) throw new RuntimeException("negatives not allowed");
+			if(number > 1000) continue;
 			result += number;
 		}
 		return result;
