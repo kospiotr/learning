@@ -16,9 +16,16 @@ public class CommandParserTest {
 
 	@Test
 	public void shouldParseDelimiterAndNumbers() throws Exception {
-		CommandParser commandParser = new CommandParser("//,\n1,2,3");
-		assertThat(commandParser.getDelimiter()).isEqualTo(",");
+		CommandParser commandParser = new CommandParser("//[,]\n1,2,3");
+		assertThat(commandParser.getDelimiters()).containsOnly(",");
 		assertThat(commandParser.getNumbers()).isEqualTo("1,2,3");
+	}
+	
+	@Test
+	public void shouldParseMultipleDelimitersAndNumbers() throws Exception {
+		CommandParser commandParser = new CommandParser("//[*][%]\n1*2%3");
+		assertThat(commandParser.getDelimiters()).containsOnly("*","%");
+		assertThat(commandParser.getNumbers()).isEqualTo("1*2%3");
 	}
 
 }

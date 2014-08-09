@@ -30,7 +30,7 @@ public class Calculator {
 	
 	private List<String> extractArguments(String command) {
 		CommandParser commandParser = new CommandParser(command);
-		return stringDelimitator.splitByDelimiter(commandParser.getNumbers(), commandParser.getDelimiter());
+		return stringDelimitator.splitByDelimiter(commandParser.getNumbers(), commandParser.getDelimiters());
 	}
 
 	private Integer sumNumbers(List<Integer> numbers) {

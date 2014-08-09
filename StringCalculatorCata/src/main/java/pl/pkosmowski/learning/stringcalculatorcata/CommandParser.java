@@ -1,6 +1,7 @@
 package pl.pkosmowski.learning.stringcalculatorcata;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 /**
  *
@@ -8,20 +9,24 @@ import java.math.BigDecimal;
  */
 class CommandParser {
 
-	private static final String DELIMITER_PREFIX = "//";
-	private static final String DELIMITER_SUFFIX = "\n";
+	private static final String DELIMITER_PREFIX = "//[";
+	private static final String DELIMITER_SPLITTER = "\\]\\[";
+	private static final String DELIMITER_SUFFIX = "]\n";
 
-	private final String delimiter;
+	private final String[] delimiters;
 	private final String numbers;
 
 	CommandParser(String command) {
+		System.out.println("command = " + command);
 		boolean hasCustomDelimiter = hasCustomDelimiter(command);
-		this.delimiter = extractDelimiter(command, hasCustomDelimiter);
+		this.delimiters = extractDelimiter(command, hasCustomDelimiter);
+		System.out.println("delimiters = " + Arrays.toString(delimiters));
 		this.numbers = extractNumbers(command, hasCustomDelimiter);
+		System.out.println("numbers = " + numbers);
 	}
 
-	public String getDelimiter() {
-		return delimiter;
+	public String[] getDelimiters() {
+		return delimiters;
 	}
 
 	public String getNumbers() {
@@ -32,15 +37,22 @@ class CommandParser {
 		return command.startsWith(DELIMITER_PREFIX);
 	}
 
-	private String extractDelimiter(String command, boolean hasCustomDelimiter) {
+	private String[] extractDelimiter(String command, boolean hasCustomDelimiter) {
 		return hasCustomDelimiter
-						? command.substring(DELIMITER_PREFIX.length(), command.indexOf(DELIMITER_SUFFIX))
-						: ",";
+						? extractDelimitersFromDelimiterSection(command)
+						: new String[]{","};
+	}
+
+	private String[] extractDelimitersFromDelimiterSection(String command) {
+		String delimiterSection = command.substring(
+						DELIMITER_PREFIX.length(),
+						command.indexOf(DELIMITER_SUFFIX));
+		return delimiterSection.split(DELIMITER_SPLITTER);
 	}
 
 	private String extractNumbers(String command, boolean hasCustomDelimiter) {
 		return hasCustomDelimiter
-						? command.substring(command.indexOf(DELIMITER_SUFFIX) + 1)
+						? command.substring(command.indexOf(DELIMITER_SUFFIX) + DELIMITER_SUFFIX.length())
 						: command;
 	}
 
