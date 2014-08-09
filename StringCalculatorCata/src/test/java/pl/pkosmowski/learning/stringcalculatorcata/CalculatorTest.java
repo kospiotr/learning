@@ -52,4 +52,9 @@ public class CalculatorTest {
 		assertThat(calculator.add("//[*][%]\n1*2%3")).isEqualTo(6);
 	}
 
+	@Test
+	public void shouldSupportMultipleLongCustomDelimiters() throws Exception {
+		assertThat(calculator.add("//[***][%%%]\n1***2%%%3")).isEqualTo(6);
+	}
+
 }
