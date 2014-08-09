@@ -26,4 +26,9 @@ public class StringDelimitatorTest {
 		assertThat(stringDelimitator.splitByDelimiter("1\n2\n3", "\n")).contains("1","2","3");
 	}
 	
+	@Test
+	public void shouldSplitByMultipleDelimiters() throws Exception {
+		assertThat(stringDelimitator.splitByDelimiter("1,2.3", ",", ".")).contains("1","2","3");
+	}
+	
 }

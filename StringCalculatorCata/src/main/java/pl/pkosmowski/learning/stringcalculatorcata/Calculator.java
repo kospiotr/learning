@@ -28,8 +28,9 @@ public class Calculator {
 
 	StringDelimitator stringDelimitator = new StringDelimitator();
 	
-	private List<String> extractArguments(String arguments) {
-		return stringDelimitator.splitByDelimiter(arguments, ",");
+	private List<String> extractArguments(String command) {
+		CommandParser commandParser = new CommandParser(command);
+		return stringDelimitator.splitByDelimiter(commandParser.getNumbers(), commandParser.getDelimiter());
 	}
 
 	private Integer sumNumbers(List<Integer> numbers) {

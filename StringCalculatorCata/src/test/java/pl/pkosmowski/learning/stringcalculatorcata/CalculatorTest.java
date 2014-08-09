@@ -33,7 +33,7 @@ public class CalculatorTest {
 	}
 
 	@Test
-	public void shouldAllowToAddNumbersDelimitedWithCommaAndNewLine() throws Exception {
-		assertThat(calculator.add("1\n2,3")).isEqualTo(6);
+	public void shouldAddNumbersWithCustomDelimiter() throws Exception {
+		assertThat(calculator.add("//;\n1;2")).isEqualTo(3);
 	}
 }
