@@ -13,7 +13,7 @@ public class Calculator {
 
 	public int add(String arguments) {
 
-		List<String> argumentList = asList(arguments.split(","));
+		List<String> argumentList = extractArguments(arguments);
 		System.out.println("argumentList = " + argumentList);
 
 		List<Integer> numbers = extractNumbers(argumentList);
@@ -24,6 +24,12 @@ public class Calculator {
 
 		return result;
 
+	}
+
+	StringDelimitator stringDelimitator = new StringDelimitator();
+	
+	private List<String> extractArguments(String arguments) {
+		return stringDelimitator.splitByDelimiter(arguments, ",");
 	}
 
 	private Integer sumNumbers(List<Integer> numbers) {

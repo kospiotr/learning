@@ -32,4 +32,8 @@ public class CalculatorTest {
 		assertThat(calculator.add("1,2,3")).isEqualTo(6);
 	}
 
+	@Test
+	public void shouldAllowToAddNumbersDelimitedWithCommaAndNewLine() throws Exception {
+		assertThat(calculator.add("1\n2,3")).isEqualTo(6);
+	}
 }
