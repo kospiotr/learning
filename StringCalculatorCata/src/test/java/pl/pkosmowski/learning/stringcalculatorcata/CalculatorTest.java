@@ -36,4 +36,9 @@ public class CalculatorTest {
 	public void shouldAddNumbersWithCustomDelimiter() throws Exception {
 		assertThat(calculator.add("//;\n1;2")).isEqualTo(3);
 	}
+
+	@Test(expected = RuntimeException.class)
+	public void shouldNotAllowToAddNegativeNumber() throws Exception {
+		assertThat(calculator.add("1,-2,3"));
+	}
 }

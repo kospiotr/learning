@@ -36,6 +36,7 @@ public class Calculator {
 	private Integer sumNumbers(List<Integer> numbers) {
 		int result = 0;
 		for (Integer number : numbers) {
+			if(number < 0) throw new RuntimeException("negatives not allowed");
 			result += number;
 		}
 		return result;
